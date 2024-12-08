@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensure links start at the top */
+  gap: 0.5em;
+  width: 100%;
+  color: rgb(255, 255, 255);
+}
+
+.navbar-links a {
+  color: rgb(255, 255, 255);
+  min-width: 44px;
+  min-height: 44px;
+  text-decoration: none;
+  padding: 0.6em;
+  align-content: center;
+}
+
+.nav-link.active {
+  color: rgb(255, 255, 255);
+  background-color: rgb(13, 110, 253);
+}
