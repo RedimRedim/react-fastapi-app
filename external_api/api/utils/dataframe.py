@@ -6,7 +6,7 @@ class DataFrameUtils:
     @staticmethod
     def save_to_csv(dataframe, path, filename):
         try:
-            path = os.path.join(path, filename)
+            path = os.path.join(path, filename + ".csv")
             dataframe.to_csv(path, index=False)
             print(f"{dataframe} saved to {path}")
         except Exception as e:

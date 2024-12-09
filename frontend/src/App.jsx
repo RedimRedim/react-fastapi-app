@@ -1,9 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Files from "./pages/Files";
 import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
 import "./css/App.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <main className="main-content">
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/Files" element={<Files />} />
+              <Route exact path="/login" element={<Login />} />
             </Routes>
           </main>
         </div>

@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000", // replace with your backend server url
+  baseURL: import.meta.env.VITE_API_URL,
 });
+
+console.log(import.meta.env.VITE_API_URL); // Should log the correct API URL
 
 export default api;

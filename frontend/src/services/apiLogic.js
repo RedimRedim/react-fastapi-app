@@ -28,3 +28,43 @@ export const downloadFile = async (filename) => {
     throw error;
   }
 };
+
+export const getFiles = async () => {
+  try {
+    const response = await api.get(`/api/files`);
+
+    if (!response.statusCode === 2000) {
+      throw new Error("Failed to fetch files");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching files: ", error);
+    throw error;
+  }
+};
+
+export const updateFile = async (file) => {
+  try {
+    const response = await api.put(
+      `/api/files/`,
+      {
+        filename: file,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.statusCode === 200) {
+      throw new Error("Failed to update file");
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error uploading files: ", error);
+    throw error;
+  }
+};

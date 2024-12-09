@@ -1,4 +1,4 @@
-from src.database.db_config import DatabaseConnection
+from database.db_config import DatabaseConnection
 from dotenv import load_dotenv
 import os
 

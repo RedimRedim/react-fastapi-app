@@ -1,7 +1,14 @@
 import psycopg2
 import pandas as pd
 from pandas import DataFrame
+from utils.dataframe import DataFrameUtils
 import os
+import logging
+from dotenv import load_dotenv
+
+logging.basicConfig(level=logging.INFO)
+
+load_dotenv()
 
 
 class DatabaseConnection:
@@ -32,17 +39,20 @@ class DatabaseConnection:
             except (Exception, psycopg2.DatabaseError) as error:
                 print(f"Error connecting to PostgreSQL database: {error}")
 
-    def execute_query(self, query, filename) -> DataFrame:
+    def execute_and_save_query(self, query, filename) -> None:
         try:
             self.cursor.execute(query)
             result = self.cursor.fetchall()
             columns = [desc[0] for desc in self.cursor.description]  # Get column names
             result_df = pd.DataFrame(result, columns=columns)
 
-            return result_df
+            # Save DataFrame to CSV file
+            DataFrameUtils.save_to_csv(result_df, self.data_path, filename)
+            logging.info(f"DataFrame saved to CSV file {self.data_path}")
         except (Exception, psycopg2.DatabaseError) as error:
+            self.cursor.connection.rollback()
             print(f"Error executing query: {error}, Connection error")
-            return None
+            raise error
 
     async def close(self):
         """Close the database connection and cursor"""
